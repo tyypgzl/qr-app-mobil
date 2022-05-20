@@ -1,4 +1,4 @@
-# qr_new
+# Qr Kod Mobil Uygulaması
 
 A new Flutter project.
 
