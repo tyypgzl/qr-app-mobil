@@ -25,11 +25,12 @@ class LessonsViewModel extends BaseViewModel {
   @override
   Future<void> init() async {
     try {
-      log('Lesson: ' + email);
+      log('Lesson: $email');
       lessons = [];
       var response = await client.from('createdLesson').select().execute();
       var list = response.data;
-      var lessonList = (list as List).map((e) => Lesson.fromJson(e)).toList();
+      var lessonList =
+          (list as List).map((e) => Lesson.fromJson(e)).toList().reversed;
       lessons.clear();
       lessons.addAll(lessonList);
     } on PostgrestException catch (e) {

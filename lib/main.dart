@@ -16,11 +16,13 @@ void main() {
   runApp(const Init());
 }
 
-void _initialize() {
+Future<void> _initialize() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Supabase.initialize(
+
+  await Supabase.initialize(
     url: AppConstants.instance.supabaseURL,
     anonKey: AppConstants.instance.supabaseAnonKey,
+    localStorage: const HiveLocalStorage(),
   );
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitDown,
@@ -28,8 +30,9 @@ void _initialize() {
   ]);
   GetIt getIt = GetIt.instance;
 
-  getIt.registerSingleton<SupabaseClient>(SupabaseClient(
-      ApiConstants.instance.supabaseURL, ApiConstants.instance.supabaseKEY));
+  getIt.registerSingleton<SupabaseClient>(
+    SupabaseClient(APIconst.supabaseURL, APIconst.supabaseKEY),
+  );
 }
 
 class Init extends StatelessWidget {

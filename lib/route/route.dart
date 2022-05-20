@@ -16,8 +16,7 @@ class AppRoute {
   static Route generateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case RouteConstants.onboard:
-        return _navigationService.materialPageRoute(
-            widget: const OnboardView());
+        return _navigationService.materialPageRoute(widget: OnboardView());
 
       case RouteConstants.register:
         return _navigationService.materialPageRoute(widget: RegisterView());

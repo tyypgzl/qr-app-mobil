@@ -39,7 +39,7 @@ class CustomButton extends StatelessWidget {
           ),
           elevation: MaterialStateProperty.all<double>(6),
         ),
-        onPressed: onTap == null ? null : onTap,
+        onPressed: onTap,
         child: Text(
           title,
           style: TextStyle(color: foregroundColor, fontSize: 16),

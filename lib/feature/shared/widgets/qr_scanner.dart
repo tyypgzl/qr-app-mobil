@@ -7,11 +7,11 @@ class QrScanner extends StatefulWidget {
   final void Function(String? barcode)? onRead;
 
   @override
-  _BarcodeScannerWithControllerState createState() =>
-      _BarcodeScannerWithControllerState();
+  BarcodeScannerWithControllerState createState() =>
+      BarcodeScannerWithControllerState();
 }
 
-class _BarcodeScannerWithControllerState extends State<QrScanner>
+class BarcodeScannerWithControllerState extends State<QrScanner>
     with SingleTickerProviderStateMixin {
   String? barcode;
 

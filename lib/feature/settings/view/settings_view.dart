@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_new/core/base/base_view.dart';
 import 'package:qr_new/feature/settings/view_model/settings_view_model.dart';
 import 'package:qr_new/feature/shared/utils/app_colors.dart';
+import 'package:qr_new/feature/shared/utils/const.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 class SettingsView extends BaseView<SettingsViewModel> {
@@ -50,7 +51,7 @@ class SettingsView extends BaseView<SettingsViewModel> {
                 children: const [
                   Text('Version: '),
                   Text(
-                    '1.0.1',
+                    version,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ],

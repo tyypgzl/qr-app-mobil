@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:qr_new/core/base/base_view.dart';
 import 'package:qr_new/core/constants/route_constants.dart';
 import 'package:qr_new/core/navigation/navigation_service.dart';
+import 'package:qr_new/feature/auth/onboard/view_model/onboard_view_model.dart';
 import 'package:qr_new/feature/shared/utils/app_colors.dart';
 import 'package:qr_new/feature/shared/widgets/custom_button.dart';
 
-class OnboardView extends StatelessWidget {
-  const OnboardView({Key? key}) : super(key: key);
+class OnboardView extends BaseView<OnboardViewModel> {
+  OnboardView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget body(BuildContext context, OnboardViewModel viewModel) {
     return SafeArea(
       child: Scaffold(
         body: Stack(
@@ -94,4 +96,7 @@ class OnboardView extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  OnboardViewModel get homeViewModel => OnboardViewModel();
 }

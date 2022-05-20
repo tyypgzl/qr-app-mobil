@@ -10,6 +10,7 @@ import 'package:qr_new/core/utils/show_snack_bar.dart';
 import 'package:qr_new/feature/auth/register/model/student.dart';
 import 'package:qr_new/feature/scan/model/user.dart';
 import 'package:qr_new/feature/shared/utils/app_colors.dart';
+import 'package:qr_new/feature/shared/utils/const.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ScanViewModel extends BaseViewModel {
@@ -65,19 +66,30 @@ class ScanViewModel extends BaseViewModel {
         await client.from('student').insert(student.toJson()).execute();
 
     state = PageState.LOADED;
-
-    if ((response.status ?? 999) >= 200 && (response.status ?? 999) <= 200) {
-      isSuccess = true;
+    if ((response.status ?? nullInt) >= 200 &&
+        (response.status ?? nullInt) <= 209) {
+      if ((studentResponse.status ?? nullInt) >= 200 &&
+          (studentResponse.status ?? nullInt) <= 209) {
+        isSuccess = true;
+        showSnackBar(
+            context: context,
+            content: Text(
+              'Ders yoklamasına katıldınız.',
+              style: TextStyle(color: AppColors.instance.black),
+            ),
+            isError: false);
+        await Future.delayed(const Duration(seconds: 2));
+        await NavigationService.instance
+            .pushNamed(routePath: RouteConstants.home, args: email);
+      }
+    } else {
       showSnackBar(
           context: context,
           content: Text(
-            'Ders yoklamasına katıldınız.',
+            'Dersler Çekil',
             style: TextStyle(color: AppColors.instance.black),
           ),
           isError: false);
-      await Future.delayed(const Duration(seconds: 2));
-      await NavigationService.instance
-          .pushNamed(routePath: RouteConstants.home, args: email);
     }
   }
 
