@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_new/feature/shared/utils/app_colors.dart';
 
 class AuthTextField extends StatefulWidget {
-  final String? labelText;
+  final Widget? labelText;
   final TextInputType? keyboardType;
   final Size? size;
   final bool isPassword;
@@ -89,7 +89,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
                 Radius.circular(24),
               ),
             ),
-            labelText: widget.labelText,
+            label: widget.labelText,
             floatingLabelBehavior: FloatingLabelBehavior.always,
             labelStyle: TextStyle(color: AppColors.instance.black),
           ),

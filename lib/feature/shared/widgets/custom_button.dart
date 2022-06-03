@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final VoidCallback? onTap;
-  final String title;
+  final Widget title;
   final Color backgroundColor;
   final Color foregroundColor;
   final double? width;
@@ -23,8 +23,11 @@ class CustomButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: ElevatedButton(
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
-          fixedSize: MaterialStateProperty.all<Size>(
+          textStyle: MaterialStateProperty.all(
+            TextStyle(color: foregroundColor, fontSize: 16),
+          ),
+          backgroundColor: MaterialStateProperty.all(backgroundColor),
+          fixedSize: MaterialStateProperty.all(
             Size(
               width ?? MediaQuery.of(context).size.width * .9,
               height ?? MediaQuery.of(context).size.height * .06,
@@ -40,10 +43,7 @@ class CustomButton extends StatelessWidget {
           elevation: MaterialStateProperty.all<double>(6),
         ),
         onPressed: onTap,
-        child: Text(
-          title,
-          style: TextStyle(color: foregroundColor, fontSize: 16),
-        ),
+        child: title,
       ),
     );
   }

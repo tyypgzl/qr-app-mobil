@@ -1,37 +1,33 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:native_notify/native_notify.dart';
+import 'package:qr_new/config/theme/dark_theme.dart';
 import 'package:qr_new/core/constants/app_constants.dart';
 import 'package:qr_new/core/constants/route_constants.dart';
+import 'package:qr_new/core/language/language_manager.dart';
 import 'package:qr_new/core/navigation/navigation_service.dart';
-import 'package:qr_new/feature/shared/utils/app_colors.dart';
-import 'package:qr_new/route/route.dart';
+import 'package:qr_new/core/theme/theme_manager.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
+import 'config/route/route.dart';
 import 'feature/shared/utils/api_const.dart';
 
-void main() {
-  _initialize();
-  runApp(const Init());
-}
-
-Future<void> _initialize() async {
+GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Supabase.initialize(
-    url: AppConstants.instance.supabaseURL,
-    anonKey: AppConstants.instance.supabaseAnonKey,
-    localStorage: const HiveLocalStorage(),
-  );
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitDown,
-    DeviceOrientation.portraitUp,
-  ]);
-  GetIt getIt = GetIt.instance;
-
-  getIt.registerSingleton<SupabaseClient>(
-    SupabaseClient(APIconst.supabaseURL, APIconst.supabaseKEY),
+  await _initialize();
+  runApp(
+    EasyLocalization(
+      supportedLocales: LanguageManager.instance.supportedLocales,
+      path: LanguageManager.instance.path,
+      fallbackLocale: LanguageManager.instance.trLocale,
+      startLocale: LanguageManager.instance.trLocale,
+      child: const Init(),
+    ),
   );
 }
 
@@ -40,32 +36,48 @@ class Init extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: RouteConstants.onboard,
-      onGenerateRoute: AppRoute.generateRoute,
-      navigatorKey: NavigationService.instance.navigatorKey,
-      title: AppConstants.instance.appTitle,
-      theme: ThemeData.light().copyWith(
-        textTheme: GoogleFonts.ralewayTextTheme(),
-        navigationBarTheme: NavigationBarThemeData(
-          elevation: 1.5,
-          backgroundColor: AppColors.instance.grey,
-          indicatorColor: AppColors.instance.orange,
-          labelTextStyle: MaterialStateProperty.all(
-            TextStyle(color: AppColors.instance.black),
-          ),
-          iconTheme: MaterialStateProperty.all(
-            IconThemeData(color: AppColors.instance.black),
-          ),
+    return ChangeNotifierProvider<ThemeManager>.value(
+      value: ThemeManager.instance,
+      child: Consumer<ThemeManager>(
+        builder: (context, theme, child) => MaterialApp(
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          debugShowCheckedModeBanner: false,
+          initialRoute: RouteConstants.onboard,
+          onGenerateRoute: AppRoute.generateRoute,
+          scaffoldMessengerKey: scaffoldMessengerKey,
+          navigatorKey: NavigationService.instance.navigatorKey,
+          title: AppConstants.instance.appTitle,
+          theme: theme.appTheme.themeData,
+          themeMode: theme.appTheme.themeMode,
+          darkTheme: DarkTheme.mode.themeData,
         ),
-        appBarTheme: AppBarTheme(
-            backgroundColor: AppColors.instance.orangeAccent,
-            foregroundColor: AppColors.instance.black,
-            centerTitle: true,
-            elevation: 0.9,
-            iconTheme: IconThemeData(color: AppColors.instance.black)),
       ),
     );
   }
+}
+
+Future<void> _initialize() async {
+  await EasyLocalization.ensureInitialized();
+
+  await Hive.initFlutter();
+
+  NativeNotify.initialize(891, 'Nv1K0Mch93VcsRtwyTZCZ7', null, null);
+
+  await Supabase.initialize(
+    url: APIconst.supabaseURL,
+    anonKey: APIconst.supabaseURL,
+    localStorage: const HiveLocalStorage(),
+  );
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
+  ]);
+
+  GetIt getIt = GetIt.instance;
+
+  getIt.registerSingleton<SupabaseClient>(
+    SupabaseClient(APIconst.supabaseURL, APIconst.supabaseKEY),
+  );
 }

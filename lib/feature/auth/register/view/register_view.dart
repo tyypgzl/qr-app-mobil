@@ -1,6 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:qr_new/core/base/base_view.dart';
+import 'package:qr_new/core/constants/app_constants.dart';
+import 'package:qr_new/core/language/loacale_key.g.dart';
 import 'package:qr_new/feature/auth/register/view_model/register_view_model.dart';
 import 'package:qr_new/feature/shared/utils/app_colors.dart';
 import 'package:qr_new/feature/shared/widgets/auth_text_field.dart';
@@ -23,8 +26,8 @@ class RegisterView extends BaseView<RegisterViewModel> {
               child: Transform.rotate(
                 angle: 699.3,
                 child: SvgPicture.asset(
-                  'assets/images/textsvg.svg',
-                  color: AppColors.instance.orange,
+                  AppConstants.instance.textSvgPath,
+                  color: AppColors.instance.orangeAccent,
                   width: 600,
                 ),
               ),
@@ -37,8 +40,8 @@ class RegisterView extends BaseView<RegisterViewModel> {
               child: SizedBox(
                 width: 325,
                 child: Image.asset(
-                  'assets/images/orange.png',
-                  color: AppColors.instance.orange,
+                  AppConstants.instance.orangePath,
+                  color: AppColors.instance.orangeAccent,
                 ),
               ),
             ),
@@ -49,8 +52,8 @@ class RegisterView extends BaseView<RegisterViewModel> {
               child: SizedBox(
                 width: 250,
                 child: Image.asset(
-                  'assets/images/orange.png',
-                  color: AppColors.instance.orange,
+                  AppConstants.instance.orangePath,
+                  color: AppColors.instance.orangeAccent,
                 ),
               ),
             ),
@@ -65,12 +68,12 @@ class RegisterView extends BaseView<RegisterViewModel> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     child: Text(
-                      'Kayıt Ol',
+                      LocaleKeys.auth_register_register,
                       style: TextStyle(
                           color: AppColors.instance.black,
                           fontSize: 48,
                           fontWeight: FontWeight.bold),
-                    ),
+                    ).tr(),
                   ),
                 ),
                 SizedBox(
@@ -97,7 +100,9 @@ class RegisterView extends BaseView<RegisterViewModel> {
                                 validator: viewModel.nameValidation,
                                 onChanged: (value) =>
                                     viewModel.firstName = value,
-                                labelText: 'Ad',
+                                labelText:
+                                    const Text(LocaleKeys.auth_register_name)
+                                        .tr(),
                                 keyboardType: TextInputType.name,
                                 size: Size(screenSize.width * .47,
                                     screenSize.height * .10),
@@ -106,7 +111,9 @@ class RegisterView extends BaseView<RegisterViewModel> {
                                 validator: viewModel.lastNameValidation,
                                 onChanged: (value) =>
                                     viewModel.lastName = value,
-                                labelText: 'Soyad',
+                                labelText:
+                                    const Text(LocaleKeys.auth_register_surname)
+                                        .tr(),
                                 keyboardType: TextInputType.name,
                                 size: Size(screenSize.width * .47,
                                     screenSize.height * .10),
@@ -116,7 +123,8 @@ class RegisterView extends BaseView<RegisterViewModel> {
                           AuthTextField(
                             validator: viewModel.mailValidation,
                             onChanged: (value) => viewModel.email = value,
-                            labelText: 'E-posta',
+                            labelText:
+                                const Text(LocaleKeys.auth_register_mail).tr(),
                             keyboardType: TextInputType.emailAddress,
                             size: Size(screenSize.width * .89,
                                 screenSize.height * .10),
@@ -124,7 +132,9 @@ class RegisterView extends BaseView<RegisterViewModel> {
                           AuthTextField(
                             validator: viewModel.passwordValidation,
                             onChanged: (value) => viewModel.password = value,
-                            labelText: 'Şifre',
+                            labelText:
+                                const Text(LocaleKeys.auth_register_password)
+                                    .tr(),
                             keyboardType: TextInputType.visiblePassword,
                             size: Size(screenSize.width * .90,
                                 screenSize.height * .10),
@@ -159,7 +169,9 @@ class RegisterView extends BaseView<RegisterViewModel> {
                               ),
                               onPressed: () =>
                                   viewModel.registerButtonOnTap(context),
-                              child: const Text('Kayıt Ol'),
+                              child:
+                                  const Text(LocaleKeys.auth_register_register)
+                                      .tr(),
                             ),
                           ),
                           SizedBox(
@@ -168,7 +180,9 @@ class RegisterView extends BaseView<RegisterViewModel> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text('Zaten bir hesabınız var mı?'),
+                              const Text(LocaleKeys
+                                      .auth_register_alreadyHaveAccount)
+                                  .tr(),
                               TextButton(
                                 onPressed: viewModel.loginButtonOnTap,
                                 style: ButtonStyle(
@@ -179,9 +193,9 @@ class RegisterView extends BaseView<RegisterViewModel> {
                                       EdgeInsetsGeometry>(EdgeInsets.zero),
                                 ),
                                 child: const Text(
-                                  'Giriş Yap',
+                                  LocaleKeys.auth_register_login,
                                   style: TextStyle(fontWeight: FontWeight.w800),
-                                ),
+                                ).tr(),
                               )
                             ],
                           ),

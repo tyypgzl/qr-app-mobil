@@ -1,0 +1,51 @@
+{
+    "auth": {
+        "onboard": {
+            "welcome": "Hoşgeldin",
+            "login": "Giriş Yap",
+            "register": "Kayıt Ol"
+        },
+        "login": {
+            "login": "Giriş Yap",
+            "mail": "E-Posta",
+            "password": "Şifre",
+            "forgotPassword": "Şifremi Unuttum",
+            "dontHaveAccount": "Hesabınız yok mu?",
+            "register": "Kayıt Ol"
+        },
+        "register": {
+            "name": "Ad",
+            "surname": "Soyad",
+            "mail": "E-Posta",
+            "password": "Şifre",
+            "register": "Kayıt Ol",
+            "alreadyHaveAccount": "Zaten bir hesabınız var mı?",
+            "login": "Giriş Yap"
+        }
+    },
+    "home": {
+        "lesson": "Dersler",
+        "settings": "Ayarlar"
+    },
+    "settings": {
+        "account": "Hesap",
+        "language": "Dil",
+        "selected": "Türkçe",
+        "turkish": "Türkçe",
+        "english": "İngilizce",
+        "theme": "Tema",
+        "light": "Açık",
+        "dark": "Koyu",
+        "about": "Hakkında",
+        "version": "Versiyon: "
+    },
+    "scan": {
+        "qrScanScreen": "Qr Okuma Ekranı",
+        "qrRead": "Qr Kod Okutuldu.",
+        "joinLesson": "Yoklamaya Katıl"
+    },
+    "licenseHeader": "Copyright 2022 Tayyip GUZEL",
+    "license1": "İşbu belgeyle, bu yazılımın ve ilgili belge dosyalarının ('Yazılım') bir kopyasını edinen herhangi bir kişiye, kullanım, kopyalama, değiştirme, birleştirme hakları dahil ancak bunlarla sınırlı olmamak üzere, herhangi bir kısıtlama olmaksızın Yazılımı kullanma izni verilir. Yazılımın kopyalarını yayınlamak, dağıtmak, alt lisansını vermek ve/veya satmak ve Yazılımın sağlandığı kişilerin aşağıdaki koşullara tabi olarak bunu yapmasına izin vermek:",
+    "license2": "Yukarıdaki telif hakkı bildirimi ve bu izin bildirimi, Yazılımın tüm kopyalarına veya önemli bölümlerine dahil edilecektir.",
+    "license4": "YAZILIM, SATILABİLİRLİK, BELİRLİ BİR AMACA UYGUNLUK VE İHLAL ETMEME GARANTİLERİ DAHİL ANCAK BUNLARLA SINIRLI OLMAYAN, AÇIK VEYA ZIMNİ HİÇBİR GARANTİ VERİLMEKSİZİN 'OLDUĞU GİBİ' SAĞLANMAKTADIR. HİÇBİR DURUMDA YAZARLAR VEYA TELİF HAKKI SAHİPLERİ, SÖZLEŞME, HAKSIZ YA DA BAŞKA BİR DURUMDA, YAZILIMIN VEYA YAZILIMLARIN KULLANIMINDAN VEYA YAZILIMLARIN DIŞINDAN VEYA BAĞLANTILI OLARAK KAYNAKLANAN HERHANGİ BİR İDDİA, ZARAR VEYA BAŞKA SORUMLULUKTAN SORUMLU TUTULAMAZLAR. YAZILIM."
+}

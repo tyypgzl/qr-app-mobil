@@ -1,7 +1,7 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_new/core/base/base_view_model.dart';
 import 'package:qr_new/core/constants/route_constants.dart';
 import 'package:qr_new/core/enum/page_state_enum.dart';
@@ -62,6 +62,7 @@ class ScanViewModel extends BaseViewModel {
         email: email,
         lesson: lesson,
         uuid: barcode);
+
     var studentResponse =
         await client.from('student').insert(student.toJson()).execute();
 
@@ -96,6 +97,11 @@ class ScanViewModel extends BaseViewModel {
   @override
   Future<void> init() async {
     log('Scan:$email');
+    var status = await Permission.camera.status;
+    if (status != PermissionStatus.granted) {
+      final permisson = await Permission.camera.request();
+      log(permisson.name);
+    }
   }
 
   @override

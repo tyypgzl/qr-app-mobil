@@ -1,0 +1,51 @@
+{
+    "auth": {
+        "onboard": {
+            "welcome": "Welcome",
+            "login": "Login",
+            "register": "Register"
+        },
+        "login": {
+            "login": "Login",
+            "mail": "E-Mail",
+            "password": "Password",
+            "forgotPassword": "Forgot Password",
+            "dontHaveAccount": "Don't have an account?",
+            "register": "Register"
+        },
+        "register": {
+            "name": "Name",
+            "surname": "Surname",
+            "mail": "E-Mail",
+            "password": "Password",
+            "register": "Register",
+            "alreadyHaveAccount": "Already have an account?",
+            "login": "Login"
+        }
+    },
+    "home": {
+        "lesson": "Lessons",
+        "settings": "Settings"
+    },
+    "settings": {
+        "account": "Account",
+        "language": "Language",
+        "selected": "English",
+        "turkish": "Turkish",
+        "english": "English",
+        "theme": "Theme",
+        "light": "Light",
+        "dark": "Dark",
+        "about": "About",
+        "version": "Version: "
+    },
+    "scan": {
+        "qrScanScreen": "Qr Scan Screen",
+        "qrRead": "Qr Code Read.",
+        "joinLesson": "Join Lesson"
+    },
+    "licenseHeader": "Copyright 2022 Tayyip GUZEL",
+    "license1": "Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:",
+    "license2": "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.",
+    "license4": "THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+}

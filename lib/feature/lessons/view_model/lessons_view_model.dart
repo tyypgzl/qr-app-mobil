@@ -11,8 +11,11 @@ import '../../home/model/lesson.dart';
 
 class LessonsViewModel extends BaseViewModel {
   final String email;
+
   LessonsViewModel({required this.email});
+
   final client = GetIt.instance<SupabaseClient>();
+  late final RealtimeSubscription subscription;
 
   late List<Lesson> lessons;
 
@@ -25,14 +28,22 @@ class LessonsViewModel extends BaseViewModel {
   @override
   Future<void> init() async {
     try {
-      log('Lesson: $email');
       lessons = [];
       var response = await client.from('createdLesson').select().execute();
       var list = response.data;
       var lessonList =
           (list as List).map((e) => Lesson.fromJson(e)).toList().reversed;
-      lessons.clear();
       lessons.addAll(lessonList);
+
+      subscription =
+          client.from('createdLesson').on(SupabaseEventTypes.insert, (payload) {
+        var addedLesson = Lesson.fromJson(payload.newRecord ?? {});
+        log(payload.newRecord.toString());
+        if (addedLesson.email != null) {
+          lessons.insert(0, addedLesson);
+          notifyListeners();
+        }
+      }).subscribe();
     } on PostgrestException catch (e) {
       log(e.error.message);
     }
@@ -43,6 +54,7 @@ class LessonsViewModel extends BaseViewModel {
     lesson.email = email;
     await NavigationService.instance
         .pushNamed(routePath: RouteConstants.scan, args: lesson);
+    subscription.unsubscribe(); // dispose ekle
   }
 
   @override

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "312059172545",
+    "project_id": "qr-app-d5661",
+    "storage_bucket": "qr-app-d5661.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:312059172545:android:8411bf020ea7b6c698a640",
+        "android_client_info": {
+          "package_name": "com.guzel.qr.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "312059172545-vhhpgor3h7auvttjg5tn2kqu956f08b8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX02OHybht_m4bI7nmKjVRmm_0KjfOlhs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "312059172545-vhhpgor3h7auvttjg5tn2kqu956f08b8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

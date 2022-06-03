@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_new/core/base/base_view_model.dart';
 import 'package:qr_new/core/constants/route_constants.dart';
@@ -123,7 +124,7 @@ class LoginViewModel extends BaseViewModel with ValidationMixin {
             child: AuthTextField(
               padding: EdgeInsets.zero,
               keyboardType: TextInputType.emailAddress,
-              labelText: 'E-posta',
+              labelText: const Text('E-posta').tr(),
               onChanged: (String? value) {
                 forgotMail = value;
                 notifyListeners();
@@ -139,7 +140,9 @@ class LoginViewModel extends BaseViewModel with ValidationMixin {
           contentPadding: const EdgeInsets.only(top: 24, left: 24, right: 24),
           actions: [
             CustomButton(
-              title: 'Gönder',
+              title: const Text(
+                'Gönder',
+              ),
               backgroundColor: AppColors.instance.pink,
               foregroundColor: AppColors.instance.black,
               width: MediaQuery.of(context).size.width,

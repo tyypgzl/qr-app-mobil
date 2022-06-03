@@ -1,6 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:qr_new/core/base/base_view.dart';
+import 'package:qr_new/core/constants/app_constants.dart';
+import 'package:qr_new/core/language/loacale_key.g.dart';
 import 'package:qr_new/feature/auth/login/view_model/login_view_model.dart';
 import 'package:qr_new/feature/shared/utils/app_colors.dart';
 import 'package:qr_new/feature/shared/widgets/auth_text_field.dart';
@@ -28,8 +31,8 @@ class LoginView extends BaseView<LoginViewModel> {
             child: Transform.rotate(
               angle: 699.3,
               child: SvgPicture.asset(
-                'assets/images/textsvg.svg',
-                color: AppColors.instance.orange,
+                AppConstants.instance.textSvgPath,
+                color: AppColors.instance.orangeAccent,
                 width: 600,
               ),
             ),
@@ -42,8 +45,8 @@ class LoginView extends BaseView<LoginViewModel> {
             child: SizedBox(
               width: 325,
               child: Image.asset(
-                'assets/images/orange.png',
-                color: AppColors.instance.orange,
+                AppConstants.instance.orangePath,
+                color: AppColors.instance.orangeAccent,
               ),
             ),
           ),
@@ -54,8 +57,8 @@ class LoginView extends BaseView<LoginViewModel> {
             child: SizedBox(
               width: 250,
               child: Image.asset(
-                'assets/images/orange.png',
-                color: AppColors.instance.orange,
+                AppConstants.instance.orangePath,
+                color: AppColors.instance.orangeAccent,
               ),
             ),
           ),
@@ -68,12 +71,12 @@ class LoginView extends BaseView<LoginViewModel> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   child: Text(
-                    'Giriş Yap',
+                    LocaleKeys.auth_login_login,
                     style: TextStyle(
                         color: AppColors.instance.black,
                         fontSize: 48,
                         fontWeight: FontWeight.bold),
-                  ),
+                  ).tr(),
                 ),
               ),
               SizedBox(height: screenSize.height * .05),
@@ -93,7 +96,7 @@ class LoginView extends BaseView<LoginViewModel> {
                       AuthTextField(
                         validator: viewModel.mailValidation,
                         onChanged: (value) => viewModel.email = value,
-                        labelText: 'E-posta',
+                        labelText: const Text(LocaleKeys.auth_login_mail).tr(),
                         keyboardType: TextInputType.emailAddress,
                         size: Size(
                             screenSize.width * .97, screenSize.height * .10),
@@ -101,7 +104,8 @@ class LoginView extends BaseView<LoginViewModel> {
                       AuthTextField(
                         validator: viewModel.passwordValidation,
                         onChanged: (value) => viewModel.password = value,
-                        labelText: 'Şifre',
+                        labelText:
+                            const Text(LocaleKeys.auth_login_password).tr(),
                         keyboardType: TextInputType.visiblePassword,
                         isPassword: true,
                         size: Size(
@@ -119,13 +123,13 @@ class LoginView extends BaseView<LoginViewModel> {
                             onPressed: () =>
                                 viewModel.forgotPasswordOnTap(context),
                             child: Text(
-                              'Şifremi Unuttum',
+                              LocaleKeys.auth_login_forgotPassword,
                               style: TextStyle(
                                   fontSize: 13,
                                   color: AppColors.instance.black,
                                   fontWeight: FontWeight.bold),
                               textAlign: TextAlign.right,
-                            ),
+                            ).tr(),
                           ),
                         ),
                       ),
@@ -133,12 +137,15 @@ class LoginView extends BaseView<LoginViewModel> {
                         onTap: () => viewModel.loginOnTap(context),
                         backgroundColor: AppColors.instance.pink,
                         foregroundColor: AppColors.instance.white,
-                        title: 'Giriş Yap',
+                        title: const Text(
+                          LocaleKeys.auth_login_login,
+                        ).tr(),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('''Hesabınız yok mu?'''),
+                          const Text(LocaleKeys.auth_login_dontHaveAccount)
+                              .tr(),
                           TextButton(
                             onPressed: viewModel.registerOnTap,
                             style: ButtonStyle(
@@ -148,8 +155,10 @@ class LoginView extends BaseView<LoginViewModel> {
                                   MaterialStateProperty.all<EdgeInsetsGeometry>(
                                       EdgeInsets.zero),
                             ),
-                            child: const Text('Kayıt Ol',
-                                style: TextStyle(fontWeight: FontWeight.w800)),
+                            child: const Text(LocaleKeys.auth_login_register,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.w800))
+                                .tr(),
                           )
                         ],
                       ),

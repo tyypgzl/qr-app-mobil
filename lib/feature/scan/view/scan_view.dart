@@ -1,12 +1,16 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:qr_new/core/base/base_view.dart';
+import 'package:qr_new/core/constants/app_constants.dart';
 import 'package:qr_new/core/navigation/navigation_service.dart';
 import 'package:qr_new/feature/home/model/lesson.dart';
 import 'package:qr_new/feature/scan/view_model/scan_view_model.dart';
 import 'package:qr_new/feature/shared/utils/app_colors.dart';
 import 'package:qr_new/feature/shared/widgets/custom_button.dart';
 import 'package:qr_new/feature/shared/widgets/qr_scanner.dart';
+
+import '../../../core/language/loacale_key.g.dart';
 
 class ScanView extends BaseView<ScanViewModel> {
   final Lesson lesson;
@@ -30,7 +34,7 @@ class ScanView extends BaseView<ScanViewModel> {
         backgroundColor: AppColors.instance.orangeAccent,
         elevation: .8,
         title: Text(
-          'Qr Okuma Ekranı',
+          LocaleKeys.scan_qrScanScreen.tr(),
           style: TextStyle(color: AppColors.instance.black),
         ),
       );
@@ -57,7 +61,7 @@ class ScanView extends BaseView<ScanViewModel> {
                 ),
                 Positioned(
                   top: -15,
-                  child: Lottie.asset('assets/animations/qr_anim.json',
+                  child: Lottie.asset(AppConstants.instance.qrAnimPath,
                       width: screenSize.width * .92),
                 ),
               ],
@@ -67,7 +71,7 @@ class ScanView extends BaseView<ScanViewModel> {
                 height: screenSize.height * .7,
                 width: screenSize.width,
                 child: Lottie.asset(
-                  'assets/animations/success.json',
+                  AppConstants.instance.successAnimPath,
                   repeat: true,
                   fit: BoxFit.cover,
                 ),
@@ -87,9 +91,9 @@ class ScanView extends BaseView<ScanViewModel> {
               width: screenSize.width * .8,
               height: screenSize.width * .13,
               child: Text(
-                'Qr Kod Okutuldu.',
-                style:
-                    TextStyle(color: AppColors.instance.orange, fontSize: 18),
+                LocaleKeys.scan_qrRead.tr(),
+                style: TextStyle(
+                    color: AppColors.instance.orangeAccent, fontSize: 18),
               ),
             ),
           ),
@@ -104,7 +108,9 @@ class ScanView extends BaseView<ScanViewModel> {
           ? viewModel.joinLessonButonOnTap(
               NavigationService.instance.navigatorKey.currentContext!)
           : null,
-      title: 'Derse Katıl',
+      title: Text(
+        LocaleKeys.scan_joinLesson.tr(),
+      ),
       backgroundColor: AppColors.instance.pink,
       foregroundColor: AppColors.instance.white,
     );

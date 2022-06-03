@@ -1,6 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_new/core/base/base_view.dart';
+import 'package:qr_new/core/constants/app_constants.dart';
 import 'package:qr_new/core/constants/route_constants.dart';
+import 'package:qr_new/core/language/loacale_key.g.dart';
 import 'package:qr_new/core/navigation/navigation_service.dart';
 import 'package:qr_new/feature/auth/onboard/view_model/onboard_view_model.dart';
 import 'package:qr_new/feature/shared/utils/app_colors.dart';
@@ -26,16 +29,16 @@ class OnboardView extends BaseView<OnboardViewModel> {
                   Expanded(
                     flex: 6,
                     child: Image.asset(
-                      'assets/images/ic_qr.png',
+                      AppConstants.instance.appIconPath,
                       width: 250,
                     ),
                   ),
                   Expanded(
                     child: Text(
-                      'Hoşgeldiniz',
+                      LocaleKeys.auth_onboard_welcome,
                       style: Theme.of(context).textTheme.headline3?.copyWith(
                           color: Colors.black, fontWeight: FontWeight.w700),
-                    ),
+                    ).tr(),
                   ),
                   const Spacer(flex: 7),
                 ],
@@ -69,7 +72,8 @@ class OnboardView extends BaseView<OnboardViewModel> {
                             },
                             backgroundColor: AppColors.instance.pink,
                             foregroundColor: AppColors.instance.white,
-                            title: 'Giriş Yap',
+                            title:
+                                const Text(LocaleKeys.auth_onboard_login).tr(),
                             height: MediaQuery.of(context).size.height * .067,
                             width: MediaQuery.of(context).size.width * .85,
                           ),
@@ -80,7 +84,9 @@ class OnboardView extends BaseView<OnboardViewModel> {
                             },
                             backgroundColor: AppColors.instance.pink,
                             foregroundColor: AppColors.instance.white,
-                            title: 'Kayıt Ol',
+                            title: const Text(
+                              LocaleKeys.auth_onboard_register,
+                            ).tr(),
                             height: MediaQuery.of(context).size.height * .067,
                             width: MediaQuery.of(context).size.width * .85,
                           ),

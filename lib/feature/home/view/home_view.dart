@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_new/core/base/base_view.dart';
+import 'package:qr_new/core/language/loacale_key.g.dart';
 import 'package:qr_new/feature/home/view_model/home_view_model.dart';
 import 'package:qr_new/feature/lessons/view/lessons_view.dart';
 import 'package:qr_new/feature/settings/view/settings_view.dart';
@@ -20,7 +22,9 @@ class HomeView extends BaseView<HomeViewModel> {
           )
         ],
         title: Text(
-          viewModel.selectedNavBar == 0 ? 'Derslerim' : 'Ayarlar',
+          viewModel.selectedNavBar == 0
+              ? LocaleKeys.home_lesson.tr()
+              : LocaleKeys.home_settings.tr(),
         ),
       );
 
@@ -31,15 +35,15 @@ class HomeView extends BaseView<HomeViewModel> {
       selectedIndex: viewModel.selectedNavBar,
       onDestinationSelected: viewModel.onDestinationSelected,
       labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-      destinations: const [
+      destinations: [
         NavigationDestination(
-          selectedIcon: Icon(Icons.book_sharp),
-          icon: Icon(Icons.book),
-          label: 'Derslerim',
+          selectedIcon: const Icon(Icons.book_sharp),
+          icon: const Icon(Icons.book),
+          label: LocaleKeys.home_lesson.tr(),
         ),
         NavigationDestination(
-          icon: Icon(Icons.settings),
-          label: 'Ayarlar',
+          icon: const Icon(Icons.settings),
+          label: LocaleKeys.home_settings.tr(),
         ),
       ],
     );

@@ -8,6 +8,8 @@ import 'package:qr_new/feature/auth/register/view/register_view.dart';
 import 'package:qr_new/feature/home/model/lesson.dart';
 import 'package:qr_new/feature/home/view/home_view.dart';
 import 'package:qr_new/feature/scan/view/scan_view.dart';
+import 'package:qr_new/feature/settings/view/about_view.dart';
+import 'package:qr_new/feature/settings/view/settings_view.dart';
 
 class AppRoute {
   static final NavigationService _navigationService =
@@ -23,6 +25,10 @@ class AppRoute {
 
       case RouteConstants.login:
         return _navigationService.materialPageRoute(widget: LoginView());
+      case RouteConstants.setting:
+        return _navigationService.materialPageRoute(widget: SettingsView());
+      case RouteConstants.about:
+        return _navigationService.materialPageRoute(widget: const AboutView());
 
       case RouteConstants.home:
         return _navigationService.materialPageRoute(

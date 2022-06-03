@@ -18,7 +18,7 @@ class Lesson {
         teacherSurname: json['teacherSurname'] ?? nullString,
       );
   factory Lesson.notNull() =>
-      Lesson('emial', name: '', teacherName: '', teacherSurname: '');
+      Lesson('email', name: '', teacherName: '', teacherSurname: '');
   Map<String, dynamic> toJson() {
     var data = <String, dynamic>{};
     data['name'] = name;
