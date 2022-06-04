@@ -6,6 +6,7 @@ import 'package:qr_new/core/base/base_view_model.dart';
 import 'package:qr_new/core/constants/route_constants.dart';
 import 'package:qr_new/core/enum/page_state_enum.dart';
 import 'package:qr_new/core/navigation/navigation_service.dart';
+import 'package:qr_new/core/supabase/supabase_auth_service.dart';
 import 'package:qr_new/core/utils/show_snack_bar.dart';
 import 'package:qr_new/feature/auth/register/model/student.dart';
 import 'package:qr_new/feature/scan/model/user.dart';
@@ -17,6 +18,8 @@ class ScanViewModel extends BaseViewModel {
   final String email;
   final String lesson;
   final client = GetIt.instance<SupabaseClient>();
+
+  SupabaseAuthService supabaseAuthService = SupabaseAuthService();
 
   late Student student;
 
@@ -45,6 +48,12 @@ class ScanViewModel extends BaseViewModel {
   Future<bool> customBack() async {
     navigationService.pop();
     return Future.value(true);
+  }
+
+  Future<void> logoutButtonOnTap() async {
+    await supabaseAuthService.signOut();
+    NavigationService.instance
+        .pushNamedAndRemoveUntil(routePath: RouteConstants.onboard);
   }
 
   Future<void> joinLessonButonOnTap(BuildContext context) async {

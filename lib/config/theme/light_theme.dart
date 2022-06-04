@@ -29,9 +29,10 @@ class LightTheme implements IAppTheme {
           foregroundColor: AppColors.instance.black,
           centerTitle: true,
           elevation: 0.9,
-          iconTheme: IconThemeData(
-            color: AppColors.instance.black,
-          ),
+        ),
+        dialogTheme: DialogTheme(
+          contentTextStyle: TextStyle(color: AppColors.instance.black),
+          titleTextStyle: TextStyle(color: AppColors.instance.black),
         ),
       );
 

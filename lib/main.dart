@@ -7,12 +7,14 @@ import 'package:native_notify/native_notify.dart';
 import 'package:qr_new/config/theme/dark_theme.dart';
 import 'package:qr_new/core/constants/app_constants.dart';
 import 'package:qr_new/core/constants/route_constants.dart';
+import 'package:qr_new/core/enum/theme_enum.dart';
 import 'package:qr_new/core/language/language_manager.dart';
 import 'package:qr_new/core/navigation/navigation_service.dart';
 import 'package:qr_new/core/theme/theme_manager.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as provider;
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'config/route/route.dart';
+import 'config/theme/light_theme.dart';
 import 'feature/shared/utils/api_const.dart';
 
 GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey =
@@ -20,12 +22,13 @@ GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey =
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await _initialize();
+  await _hiveLangAndThemeInit();
   runApp(
     EasyLocalization(
       supportedLocales: LanguageManager.instance.supportedLocales,
       path: LanguageManager.instance.path,
       fallbackLocale: LanguageManager.instance.trLocale,
-      startLocale: LanguageManager.instance.trLocale,
+      startLocale: LanguageManager.instance.enLocale,
       child: const Init(),
     ),
   );
@@ -36,9 +39,9 @@ class Init extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ThemeManager>.value(
+    return provider.ChangeNotifierProvider<ThemeManager>.value(
       value: ThemeManager.instance,
-      child: Consumer<ThemeManager>(
+      child: provider.Consumer<ThemeManager>(
         builder: (context, theme, child) => MaterialApp(
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
@@ -80,4 +83,20 @@ Future<void> _initialize() async {
   getIt.registerSingleton<SupabaseClient>(
     SupabaseClient(APIconst.supabaseURL, APIconst.supabaseKEY),
   );
+}
+
+Future<void> _hiveLangAndThemeInit() async {
+  bool isThemeBoxExist = await Hive.boxExists('theme');
+
+  if (isThemeBoxExist) {
+    var box = await Hive.openBox<String>('theme');
+    var data = box.get(ThemeModeEnum.themeMode.name);
+    if (data != null) {
+      if (data == ThemeModeEnum.dark.name) {
+        ThemeManager.instance.changeTheme(DarkTheme.mode);
+      } else {
+        ThemeManager.instance.changeTheme(LightTheme.mode);
+      }
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:qr_new/config/theme/dark_theme.dart';
 import 'package:qr_new/core/base/base_view.dart';
 import 'package:qr_new/core/constants/app_constants.dart';
 import 'package:qr_new/core/language/loacale_key.g.dart';
@@ -169,9 +170,15 @@ class RegisterView extends BaseView<RegisterViewModel> {
                               ),
                               onPressed: () =>
                                   viewModel.registerButtonOnTap(context),
-                              child:
-                                  const Text(LocaleKeys.auth_register_register)
-                                      .tr(),
+                              child: Text(
+                                LocaleKeys.auth_register_register,
+                                style: TextStyle(
+                                  color: themeManager.appTheme == DarkTheme.mode
+                                      ? Colors.black
+                                      : Colors.white,
+                                  fontSize: 16,
+                                ),
+                              ).tr(),
                             ),
                           ),
                           SizedBox(

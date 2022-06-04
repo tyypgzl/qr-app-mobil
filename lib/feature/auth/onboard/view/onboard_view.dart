@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_new/config/theme/dark_theme.dart';
 import 'package:qr_new/core/base/base_view.dart';
 import 'package:qr_new/core/constants/app_constants.dart';
 import 'package:qr_new/core/constants/route_constants.dart';
@@ -21,9 +22,7 @@ class OnboardView extends BaseView<OnboardViewModel> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-              ),
+              decoration: const BoxDecoration(),
               child: Column(
                 children: [
                   Expanded(
@@ -37,7 +36,10 @@ class OnboardView extends BaseView<OnboardViewModel> {
                     child: Text(
                       LocaleKeys.auth_onboard_welcome,
                       style: Theme.of(context).textTheme.headline3?.copyWith(
-                          color: Colors.black, fontWeight: FontWeight.w700),
+                          color: themeManager.appTheme == DarkTheme.mode
+                              ? Colors.white
+                              : Colors.black,
+                          fontWeight: FontWeight.w700),
                     ).tr(),
                   ),
                   const Spacer(flex: 7),
@@ -71,9 +73,19 @@ class OnboardView extends BaseView<OnboardViewModel> {
                                   .pushNamed(routePath: RouteConstants.login);
                             },
                             backgroundColor: AppColors.instance.pink,
-                            foregroundColor: AppColors.instance.white,
-                            title:
-                                const Text(LocaleKeys.auth_onboard_login).tr(),
+                            foregroundColor:
+                                themeManager.appTheme == DarkTheme.mode
+                                    ? AppColors.instance.black
+                                    : AppColors.instance.white,
+                            title: Text(
+                              LocaleKeys.auth_onboard_login,
+                              style: TextStyle(
+                                color: themeManager.appTheme == DarkTheme.mode
+                                    ? AppColors.instance.black
+                                    : AppColors.instance.white,
+                                fontSize: 16,
+                              ),
+                            ).tr(),
                             height: MediaQuery.of(context).size.height * .067,
                             width: MediaQuery.of(context).size.width * .85,
                           ),
@@ -83,9 +95,18 @@ class OnboardView extends BaseView<OnboardViewModel> {
                                   routePath: RouteConstants.register);
                             },
                             backgroundColor: AppColors.instance.pink,
-                            foregroundColor: AppColors.instance.white,
-                            title: const Text(
+                            foregroundColor:
+                                themeManager.appTheme == DarkTheme.mode
+                                    ? AppColors.instance.black
+                                    : AppColors.instance.white,
+                            title: Text(
                               LocaleKeys.auth_onboard_register,
+                              style: TextStyle(
+                                color: themeManager.appTheme == DarkTheme.mode
+                                    ? AppColors.instance.black
+                                    : AppColors.instance.white,
+                                fontSize: 16,
+                              ),
                             ).tr(),
                             height: MediaQuery.of(context).size.height * .067,
                             width: MediaQuery.of(context).size.width * .85,

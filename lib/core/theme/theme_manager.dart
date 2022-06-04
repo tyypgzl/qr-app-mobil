@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:qr_new/config/theme/dark_theme.dart';
 import 'package:qr_new/config/theme/light_theme.dart';
 
 import '../../config/theme/interface_app_theme.dart';
@@ -14,12 +13,8 @@ class ThemeManager extends ChangeNotifier {
     appTheme = LightTheme.mode;
   }
 
-  void changeTheme() {
-    if (appTheme is DarkTheme) {
-      appTheme = LightTheme.mode;
-    } else {
-      appTheme = DarkTheme.mode;
-    }
+  void changeTheme(IAppTheme theme) {
+    appTheme = theme;
     notifyListeners();
   }
 }

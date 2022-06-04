@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:qr_new/config/theme/dark_theme.dart';
 import 'package:qr_new/core/base/base_view.dart';
 import 'package:qr_new/core/constants/app_constants.dart';
 import 'package:qr_new/core/language/loacale_key.g.dart';
@@ -14,9 +15,6 @@ class LoginView extends BaseView<LoginViewModel> {
 
   @override
   LoginViewModel get homeViewModel => LoginViewModel();
-
-  @override
-  Color? get backgroundColor => Colors.white;
 
   @override
   Widget? body(BuildContext context, LoginViewModel viewModel) {
@@ -136,9 +134,17 @@ class LoginView extends BaseView<LoginViewModel> {
                       CustomButton(
                         onTap: () => viewModel.loginOnTap(context),
                         backgroundColor: AppColors.instance.pink,
-                        foregroundColor: AppColors.instance.white,
-                        title: const Text(
+                        foregroundColor: themeManager.appTheme == DarkTheme.mode
+                            ? AppColors.instance.black
+                            : AppColors.instance.white,
+                        title: Text(
                           LocaleKeys.auth_login_login,
+                          style: TextStyle(
+                            color: themeManager.appTheme == DarkTheme.mode
+                                ? AppColors.instance.black
+                                : AppColors.instance.white,
+                            fontSize: 16,
+                          ),
                         ).tr(),
                       ),
                       Row(

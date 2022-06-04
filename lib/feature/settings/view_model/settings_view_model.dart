@@ -1,5 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:qr_new/config/theme/dark_theme.dart';
+import 'package:qr_new/config/theme/light_theme.dart';
 import 'package:qr_new/core/base/base_view_model.dart';
 import 'package:qr_new/core/cache/hive_manager.dart';
 import 'package:qr_new/core/constants/route_constants.dart';
@@ -16,13 +19,13 @@ class SettingsViewModel extends BaseViewModel {
   ThemeModeEnum _themeEnum = ThemeModeEnum.light;
   LanguageEnum _languageEnum = LanguageEnum.turkish;
 
-  bool isLightTheme = true;
-
   @override
   Future<bool> customBack() async {
     navigationService.pop();
     return Future.value(true);
   }
+
+  bool get isDarkMode => _themeEnum == ThemeModeEnum.dark;
 
   @override
   Future<void> init() async {
@@ -49,8 +52,8 @@ class SettingsViewModel extends BaseViewModel {
 
   Future<void> _themeInit() async {
     await hiveTheme.createBox();
-    bool isLanguageBoxExist = await Hive.boxExists('theme');
-    if (isLanguageBoxExist) {
+    bool isThemeBoxExist = await Hive.boxExists('theme');
+    if (isThemeBoxExist) {
       var data = hiveTheme.getBox(ThemeModeEnum.themeMode.name);
       if (data != null) {
         if (data == ThemeModeEnum.dark.name) {
@@ -69,39 +72,44 @@ class SettingsViewModel extends BaseViewModel {
   Future<void> turkishOnTap(
       BuildContext context, LanguageManager languageManager) async {
     languageManager.setTurkishLocale();
+    context.setLocale(languageManager.selectedLocale);
     _languageEnum = LanguageEnum.turkish;
     await hiveLanguage.setBox('languageMode', _languageEnum.name);
+
+    navigationService.pop();
     notifyListeners();
   }
 
   Future<void> englishOnTap(
       BuildContext context, LanguageManager languageManager) async {
     languageManager.setEnglishLocale();
+    context.setLocale(languageManager.selectedLocale);
     _languageEnum = LanguageEnum.english;
     await hiveLanguage.setBox('languageMode', _languageEnum.name);
+    navigationService.pop();
     notifyListeners();
   }
 
   Future<void> darkModeOnTap(
       BuildContext context, ThemeManager themeManager) async {
-    themeManager.changeTheme();
+    themeManager.changeTheme(DarkTheme.mode);
     _themeEnum = ThemeModeEnum.dark;
     hiveTheme.setBox(ThemeModeEnum.themeMode.name, ThemeModeEnum.dark.name);
+    navigationService.pop();
     notifyListeners();
   }
 
   Future<void> lightModeOnTap(
       BuildContext context, ThemeManager themeManager) async {
-    themeManager.changeTheme();
+    themeManager.changeTheme(LightTheme.mode);
 
     _themeEnum = ThemeModeEnum.light;
     hiveTheme.setBox(ThemeModeEnum.themeMode.name, ThemeModeEnum.light.name);
+    navigationService.pop();
     notifyListeners();
   }
 
   Future<void> aboutOnTap(BuildContext context) async {
     await navigationService.pushNamed(routePath: RouteConstants.about);
   }
-
-  void accountOnTap() {}
 }

@@ -11,4 +11,8 @@ class AppConstants {
   String orangePath = 'assets/images/orange.png';
   String qrAnimPath = 'assets/animations/qr_anim.json';
   String successAnimPath = 'assets/animations/success.json';
+  String lightModePath = 'assets/images/ic_light_mode.png';
+  String darkModePath = 'assets/images/ic_dark_mode.png';
+  String trFlagPath = 'assets/images/flag_tr.png';
+  String ukFlagPath = 'assets/images/flag_uk.png';
 }

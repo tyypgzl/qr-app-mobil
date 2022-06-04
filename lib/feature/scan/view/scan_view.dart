@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:qr_new/config/theme/dark_theme.dart';
 import 'package:qr_new/core/base/base_view.dart';
 import 'package:qr_new/core/constants/app_constants.dart';
 import 'package:qr_new/core/navigation/navigation_service.dart';
@@ -23,19 +24,14 @@ class ScanView extends BaseView<ScanViewModel> {
 
   @override
   PreferredSizeWidget? appBar(ScanViewModel viewModel) => AppBar(
-        iconTheme: IconThemeData(color: AppColors.instance.black),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: viewModel.logoutButtonOnTap,
             icon: const Icon(Icons.logout),
-            color: AppColors.instance.black,
           )
         ],
-        backgroundColor: AppColors.instance.orangeAccent,
-        elevation: .8,
         title: Text(
           LocaleKeys.scan_qrScanScreen.tr(),
-          style: TextStyle(color: AppColors.instance.black),
         ),
       );
 
@@ -86,14 +82,19 @@ class ScanView extends BaseView<ScanViewModel> {
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: AppColors.instance.black,
+                color: themeManager.appTheme == DarkTheme.mode
+                    ? AppColors.instance.white
+                    : AppColors.instance.black,
               ),
               width: screenSize.width * .8,
               height: screenSize.width * .13,
               child: Text(
                 LocaleKeys.scan_qrRead.tr(),
                 style: TextStyle(
-                    color: AppColors.instance.orangeAccent, fontSize: 18),
+                    color: themeManager.appTheme == DarkTheme.mode
+                        ? AppColors.instance.black
+                        : AppColors.instance.orangeAccent,
+                    fontSize: 18),
               ),
             ),
           ),
