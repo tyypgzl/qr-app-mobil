@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_new/config/theme/dark_theme.dart';
 import 'package:qr_new/core/language/loacale_key.g.dart';
+import 'package:qr_new/core/theme/theme_manager.dart';
 
 class AboutView extends StatelessWidget {
   const AboutView({Key? key}) : super(key: key);
@@ -41,4 +43,8 @@ class AboutView extends StatelessWidget {
   }
 }
 
-var _style = const TextStyle(fontSize: 16);
+var _style = TextStyle(
+    fontSize: 16,
+    color: ThemeManager.instance.appTheme == DarkTheme.mode
+        ? Colors.black
+        : Colors.white);
