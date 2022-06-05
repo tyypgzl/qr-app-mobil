@@ -31,7 +31,8 @@ dependencies:
   firebase_messaging: ^11.4.1
   firebase_core: ^1.17.1
   flutter_local_notifications: ^9.5.3+1
-  native_notify: ^0.0.13
+  crypto: ^3.0.2
+  onesignal_flutter: ^3.3.1
 
   
 

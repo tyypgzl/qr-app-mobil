@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:native_notify/native_notify.dart';
 import 'package:qr_new/config/theme/dark_theme.dart';
 import 'package:qr_new/core/constants/app_constants.dart';
 import 'package:qr_new/core/constants/route_constants.dart';
@@ -15,6 +14,7 @@ import 'package:provider/provider.dart' as provider;
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'config/route/route.dart';
 import 'config/theme/light_theme.dart';
+import 'core/notification/one_signal_manager.dart';
 import 'feature/shared/utils/api_const.dart';
 
 GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey =
@@ -64,9 +64,10 @@ class Init extends StatelessWidget {
 Future<void> _initialize() async {
   await EasyLocalization.ensureInitialized();
 
-  await Hive.initFlutter();
+  await OneSignalManager.initialize();
+  OneSignalManager.notificationHandler();
 
-  NativeNotify.initialize(891, 'Nv1K0Mch93VcsRtwyTZCZ7', null, null);
+  await Hive.initFlutter();
 
   await Supabase.initialize(
     url: APIconst.supabaseURL,

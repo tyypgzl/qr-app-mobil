@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_new/core/base/base_view_model.dart';
 import 'package:qr_new/core/constants/route_constants.dart';
+import 'package:qr_new/core/crypto/crypto_manager.dart';
 import 'package:qr_new/core/enum/page_state_enum.dart';
 import 'package:qr_new/core/mixin/validation_mixin.dart';
 import 'package:qr_new/core/navigation/navigation_service.dart';
@@ -52,8 +53,10 @@ class LoginViewModel extends BaseViewModel with ValidationMixin {
       formGlobalKey.currentState!.save();
 
       log(email ?? 'Login EMail gelmedi');
-      var response =
-          await supaBaseAuthManager.login(email: email, password: password);
+      var encryptedPassword = CryptoManager.encryptData(data: password!);
+
+      var response = await supaBaseAuthManager.login(
+          email: email, password: encryptedPassword);
 
       if (response.statusCode == 200) {
         navigationService.pushNamedAndRemoveUntil(

@@ -22,13 +22,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.8.2"
-  awesome_notifications:
-    dependency: transitive
-    description:
-      name: awesome_notifications
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.6.21"
   boolean_selector:
     dependency: transitive
     description:
@@ -72,7 +65,7 @@ packages:
     source: hosted
     version: "1.16.0"
   crypto:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: crypto
       url: "https://pub.dartlang.org"
@@ -378,13 +371,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
-  native_notify:
-    dependency: "direct main"
-    description:
-      name: native_notify
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.13"
   nested:
     dependency: transitive
     description:
@@ -392,6 +378,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  onesignal_flutter:
+    dependency: "direct main"
+    description:
+      name: onesignal_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.3.1"
   path:
     dependency: transitive
     description:

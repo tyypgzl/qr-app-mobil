@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:qr_new/core/base/base_view_model.dart';
 import 'package:qr_new/core/constants/route_constants.dart';
+import 'package:qr_new/core/crypto/crypto_manager.dart';
 import 'package:qr_new/core/enum/page_state_enum.dart';
 import 'package:qr_new/core/mixin/validation_mixin.dart';
 import 'package:qr_new/core/navigation/navigation_service.dart';
@@ -49,13 +50,15 @@ class RegisterViewModel extends BaseViewModel with ValidationMixin {
     state = PageState.LOADING;
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
+      var encryptedPassword = CryptoManager.encryptData(data: password!);
+
       var authResponse = await authService.register(
           email: email!,
-          password: password!,
+          password: encryptedPassword,
           name: firstName,
           surname: lastName);
       var databaseResponse =
-          await client.from('user').insert(createStudent.toJson()).execute();
+          await client.from('user').insert(user.toJson()).execute();
 
       log('Error${databaseResponse.error?.message ?? ''}Status Code: ${databaseResponse.status}');
 
@@ -73,12 +76,16 @@ class RegisterViewModel extends BaseViewModel with ValidationMixin {
     state = PageState.LOADED;
   }
 
-  UserModel get createStudent => UserModel(
-      name: firstName ?? '',
-      surname: lastName ?? '',
-      email: email ?? '',
-      password: password ?? '',
-      uuid: 'uuid');
+  UserModel get user {
+    var encryptedPassword = CryptoManager.encryptData(data: password!);
+
+    return UserModel(
+        name: firstName ?? '',
+        surname: lastName ?? '',
+        email: email ?? '',
+        password: encryptedPassword,
+        uuid: 'uuid');
+  }
 
   void loginButtonOnTap() {
     navigationService.pushNamedAndRemoveUntil(routePath: RouteConstants.login);
