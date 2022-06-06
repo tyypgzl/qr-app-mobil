@@ -93,11 +93,7 @@ class RegisterViewModel extends BaseViewModel with ValidationMixin {
 
   String? nameValidation(String? value) {
     if (firstName != null) {
-      if (isEmailValid(value!)) {
-        return null;
-      } else {
-        return 'Geçerli bir ad giriniz.';
-      }
+      return null;
     } else {
       return 'Geçerli bir ad giriniz.';
     }
@@ -105,11 +101,7 @@ class RegisterViewModel extends BaseViewModel with ValidationMixin {
 
   String? lastNameValidation(String? value) {
     if (lastName != null) {
-      if (isEmailValid(value!)) {
-        return null;
-      } else {
-        return 'Geçerli bir soyad giriniz.';
-      }
+      return null;
     } else {
       return 'Geçerli bir soyad giriniz.';
     }
